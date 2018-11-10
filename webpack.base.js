@@ -14,7 +14,7 @@ module.exports = {
         enforce: "pre"
       },
       {
-        test: /\.tsx$/,
+        test: /\.tsx?$/,
         loader: "babel-loader"
       }
     ]

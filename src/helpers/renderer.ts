@@ -1,9 +1,17 @@
 import * as React from "react";
 import { renderToString } from "react-dom/server";
-import { Home } from "../client/components/Home";
+import { StaticRouter } from "react-router-dom";
+import { Routes } from "../client/Routes";
+import { Request } from "express";
 
-export function renderer() {
-  const content = renderToString(React.createElement(Home));
+export function renderer(req: Request): string {
+  const content = renderToString(
+    React.createElement(
+      StaticRouter,
+      { context: {}, location: req.path },
+      React.createElement(Routes)
+    )
+  );
 
   return `
     <html>

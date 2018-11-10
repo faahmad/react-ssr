@@ -5,7 +5,7 @@ const baseConfig = require("./webpack.base.js");
 const config = {
   // Tell webpack the root file of our
   // client application
-  entry: "./src/client/client.ts",
+  entry: "./src/client/index.ts",
   // Tell webpack where to put the output file
   // that is generated
   output: {
