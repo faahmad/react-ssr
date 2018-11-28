@@ -1,5 +1,5 @@
 import { Home } from "./components/Home";
-import { UsersList } from "./components/UsersList";
+import { UsersList, loadData } from "./components/UsersList";
 
 export const routes = [
   {
@@ -8,6 +8,7 @@ export const routes = [
     exact: true
   },
   {
+    loadData,
     path: "/users",
     component: UsersList
   }

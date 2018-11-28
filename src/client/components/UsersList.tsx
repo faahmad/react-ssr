@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../actions";
 import { User, ApplicationState } from "../types";
+import { Store } from "redux";
 
 type ReduxStoreProps = {
   users: ApplicationState["users"];
@@ -14,10 +15,6 @@ type DispatchProps = {
 type Props = ReduxStoreProps & DispatchProps;
 
 class _UsersList extends React.Component<Props, {}> {
-  componentDidMount() {
-    this.props.fetchUsers();
-  }
-
   renderUsers() {
     return this.props.users.map((user: User) => {
       return <li key={user.id}>{user.name}</li>;
@@ -36,6 +33,11 @@ class _UsersList extends React.Component<Props, {}> {
 
 function mapStateToProps(state: ApplicationState) {
   return { users: state.users };
+}
+
+export function loadData(store: Store<ApplicationState>) {
+  console.log("loadData");
+  return store.dispatch(fetchUsers());
 }
 
 export const UsersList = connect(
