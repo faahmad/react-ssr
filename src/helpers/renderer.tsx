@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { Store } from "redux";
 import { Request } from "express";
 import { renderRoutes } from "react-router-config";
+import * as serialize from "serialize-javascript";
 import { routes } from "../client/routes";
 
 export function renderer(req: Request, store: Store<{}>): string {
@@ -21,6 +22,9 @@ export function renderer(req: Request, store: Store<{}>): string {
       <head></head>
       <body>
         <div id="root">${content}</div>
+        <script>
+          window.INITIAL_STATE = ${serialize(store.getState())}
+        </script>
         <script src="bundle.js"></script>
       </body>
     </html>

@@ -14,18 +14,20 @@ type DispatchProps = {
 
 type Props = ReduxStoreProps & DispatchProps;
 
-class _UsersList extends React.Component<Props, {}> {
-  renderUsers() {
-    return this.props.users.map((user: User) => {
-      return <li key={user.id}>{user.name}</li>;
-    });
+class _UsersPage extends React.Component<Props, {}> {
+  componentDidMount() {
+    this.props.fetchUsers();
   }
 
   render() {
     return (
       <div>
         Here's a big list of users:
-        <ul>{this.renderUsers()}</ul>
+        <ul>
+          {this.props.users.map((user: User) => (
+            <li key={user.id}>{user.name}</li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -35,12 +37,16 @@ function mapStateToProps(state: ApplicationState) {
   return { users: state.users };
 }
 
-export function loadData(store: Store<ApplicationState>) {
-  console.log("loadData");
+function loadData(store: Store<ApplicationState>) {
   return store.dispatch(fetchUsers());
 }
 
-export const UsersList = connect(
+const UsersPage = connect(
   mapStateToProps,
   { fetchUsers }
-)(_UsersList);
+)(_UsersPage);
+
+export default {
+  loadData,
+  component: UsersPage
+};

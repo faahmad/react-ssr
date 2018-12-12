@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function Home() {
+function HomePage() {
   return (
     <div>
       <div>Home Component</div>
@@ -8,3 +8,7 @@ export function Home() {
     </div>
   );
 }
+
+export default {
+  component: HomePage
+};
